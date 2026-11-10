@@ -9,10 +9,12 @@ body { font-family: sans-serif; background: #1c2330; color: #fff; padding: 20px;
 button { width: 100%; padding: 14px; margin: 8px 0; border: 0; border-radius: 10px; background: #2b7fd6; color: #fff; font-size: 16px; }
 button:disabled { opacity: .6; }
 #out { white-space: pre-line; font-size: 17px; line-height: 1.7; margin: 14px 0; min-height: 90px; }
+small { color: #8a93a6; }
 </style>
 </head>
 <body>
 <h2>Internet Meter</h2>
+<small>версия 2</small>
 <button id="run" onclick="measure()">🚀 Измерить скорость</button>
 <div id="out"></div>
 <button onclick="send('history')">📜 История</button>
@@ -34,7 +36,7 @@ async function ping() {
     await fetch(API + '__down?bytes=0&r=' + Math.random(), { cache: 'no-store' });
     a.push(performance.now() - t);
   }
-  a.shift(); // первый запрос включает установку соединения
+  a.shift();
   let j = 0;
   for (let i = 1; i < a.length; i++) j += Math.abs(a[i] - a[i - 1]);
   return { ping: Math.min(...a), jit: j / (a.length - 1) };
